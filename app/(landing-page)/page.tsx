@@ -8,11 +8,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="bg-white">
-      {/* <HomepageIndex /> */}
-
-      <h1>
-        This is <span>{1 + 1}</span> numbers
-      </h1>
+      <HomepageIndex />
     </div>
     // <div className="bg-white">
 
