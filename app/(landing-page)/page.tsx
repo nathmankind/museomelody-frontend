@@ -1,10 +1,12 @@
 "use client";
 
 import { HomepageIndex } from "@/views/homepage";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="bg-white">

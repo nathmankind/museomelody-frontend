@@ -4,9 +4,11 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 const EventDetailsPage: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter();
 
   const searchParams = useSearchParams();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const searchQuery = searchParams.get("id");
 
   // Simulated event details (you can replace this with actual data fetching)

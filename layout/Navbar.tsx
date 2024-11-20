@@ -60,13 +60,27 @@ const Navbar = () => {
         </div>
 
         {/* Become a Member Button (visible only on larger screens) */}
-        <div className="hidden md:block">
-          <button className="bg-white hover:bg-gray-600 text-purple-900 font-bold  py-2 px-4 rounded">
-            <Link href="/membership">Become a member</Link>
-          </button>
-        </div>
-      </div>
+         <div className="hidden md:flex space-x-4">
+                  <Link 
+            href="/signin" 
+            className="bg-white text-purple-900 font-bold py-2 px-4 rounded hover:bg-gray-200">
+            Sign In
+          </Link>
+          <Link 
+  href="/signup" 
+  className="bg-white text-purple-900 font-bold py-2 px-4 rounded hover:bg-gray-200">
+  Sign Up
+</Link>
 
+<Link 
+  href="/membership" 
+  className="bg-white hover:bg-gray-600 text-purple-900 font-bold py-2 px-4 rounded">
+  Become a Member
+</Link>
+          </div>
+        </div>
+
+      
       {/* Mobile Menu */}
       <div
         className={`md:hidden ${
@@ -85,9 +99,7 @@ const Navbar = () => {
         <Link href="/pricing" className="block py-2">
           Pricing
         </Link>
-        <button className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded mt-4 block">
-          <Link href="/membership">Become a member</Link>
-        </button>
+      
       </div>
     </nav>
     // <nav className="bg-gray-900 text-white">
