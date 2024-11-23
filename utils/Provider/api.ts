@@ -1,14 +1,14 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "./constants";
+import { BASE_URL, token_name } from "./constants";
 import Cookies from "js-cookie";
 
 const client = axios.create({
   baseURL: BASE_URL,
 });
 
-export const request = async (options: AxiosRequestConfig<any>) => {
+export const httpReq = async (options: AxiosRequestConfig<any>) => {
   let token;
-  const userToken = Cookies.get("tK_U_za");
+  const userToken = Cookies.get(token_name);
 
   //const userState = state?.user?.currentUser;
   // if (userState === null) {
@@ -30,4 +30,33 @@ export const request = async (options: AxiosRequestConfig<any>) => {
   };
 
   return client(options).then(onSuccess).catch(onError);
+};
+
+export const createApiClient = () => {
+  const config: AxiosRequestConfig = {
+    baseURL: BASE_URL,
+  };
+  const accessToken = Cookies.get("tK_U_za");
+  if (accessToken) {
+    config.headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+  }
+
+  const client = axios.create(config);
+  client.interceptors.response.use(
+    (res) => {
+      return Promise.resolve(res);
+    },
+    (err) => {
+      if (err.response) {
+        if (err.response.data && err.response.data.error === "EXPIRED_TOKEN") {
+          Cookies.remove("tK_U_za");
+          window.location.href = "/";
+        }
+      }
+      return Promise.reject(err);
+    }
+  );
+  return client;
 };

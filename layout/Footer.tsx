@@ -1,3 +1,4 @@
+"use client";
 // components/Footer.tsx
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
@@ -6,7 +7,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-purple-900 text-white py-10">
       <div className="container mx-auto px-6 md:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-4 grid-cols-4 ">
           {/* Logo and Description */}
           <div>
             <h3 className="text-2xl font-semibold mb-4">MuseoMelody</h3>
