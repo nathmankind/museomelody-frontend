@@ -1,37 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FormikProvider, useFormik } from "formik";
 import { usePostData } from "@/utils/hooks/useMutation";
-import { registerUser } from "@/utils/services/api.services";
-import { useMutation } from "@tanstack/react-query";
+import Cookies from "js-cookie";
+import { token_name } from "@/utils/Provider/constants";
 
-export default function SignUp() {
-  const [errMessage, setErrMessage] = useState("");
+export default function Verify() {
   const router = useRouter();
+  const [errMessage, setErrMessage] = useState("");
 
   const { mutateAsync, isError, isPending, error } = usePostData();
 
   const form = useFormik({
     initialValues: {
-      username: "",
       email: "",
-      password: "",
-      confirmPassword: "",
+      otp: "",
     },
-
     onSubmit: (values) => {
-      let payload = {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-        role: "user",
-      };
-      mutateAsync({ endpoint: "/auth/register", payload })
-        .then((res) => {
-          router.push("/verify-email");
+      // do something
+
+      mutateAsync({ endpoint: "/auth/verify-email", payload: values })
+        .then((res: any) => {
+          // Do something
+          Cookies.set(token_name, res.data.accessToken);
+          router.push("/");
         })
         .catch((err) => {
           setErrMessage(err.response.data.details.message as string);
@@ -43,35 +38,17 @@ export default function SignUp() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center text-purple-900">
-          Create Your Account
+          Verify your email
         </h2>
 
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {error.message}
+            {errMessage}
           </div>
         )}
+
         <FormikProvider value={form}>
           <form onSubmit={form.handleSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Username
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
-                onChange={form.handleChange}
-                value={form.values.username}
-                // onChange={(e) => form.setFieldValue("username", e.target.value)}
-              />
-            </div>
-
             <div>
               <label
                 htmlFor="email"
@@ -85,10 +62,6 @@ export default function SignUp() {
                 name="email"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
-                // value={formData.email}
-                // onChange={(e) =>
-                //   setFormData({ ...formData, email: e.target.value })
-                // }
                 value={form.values.email}
                 onChange={form.handleChange}
               />
@@ -96,38 +69,18 @@ export default function SignUp() {
 
             <div>
               <label
-                htmlFor="password"
+                htmlFor="otp"
                 className="block text-sm font-medium text-gray-700"
               >
-                Password
+                Otp Code
               </label>
               <input
-                id="password"
-                type="password"
-                name="password"
+                id="otp"
+                type="otp"
+                name="otp"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
-                value={form.values.password}
-                // onChange={(e) =>
-                //   setFormData({ ...formData, password: e.target.value })
-                // }
-                onChange={form.handleChange}
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Confirm Password
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
-                value={form.values.confirmPassword}
+                value={form.values.otp}
                 onChange={form.handleChange}
               />
             </div>
@@ -137,7 +90,7 @@ export default function SignUp() {
               disabled={isPending}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-900 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50"
             >
-              {isPending ? "Creating account..." : "Sign Up"}
+              {isPending ? "Verifying..." : "Verify"}
             </button>
           </form>
         </FormikProvider>
@@ -149,23 +102,17 @@ export default function SignUp() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white text-gray-500">
-                Already have an account?
+                New to MuseoMelody?
               </span>
             </div>
           </div>
 
           <div className="mt-6 flex flex-col space-y-4">
             <Link
-              href="/signin"
+              href="/signup"
               className="w-full flex justify-center py-2 px-4 border border-purple-900 rounded-md shadow-sm text-sm font-medium text-purple-900 hover:bg-purple-50"
             >
-              Sign in instead
-            </Link>
-            <Link
-              href="/membership"
-              className="w-full flex justify-center py-2 px-4 border border-purple-900 rounded-md shadow-sm text-sm font-medium text-purple-900 hover:bg-purple-50"
-            >
-              View Membership Options
+              Create an account
             </Link>
           </div>
         </div>

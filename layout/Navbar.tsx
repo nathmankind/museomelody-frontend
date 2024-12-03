@@ -58,14 +58,14 @@ const Navbar = () => {
           <Link href="/" className="hover:text-gray-300 block md:inline">
             Home
           </Link>
-          <Link
+          {/* <Link
             href="/exhibitions"
             className="hover:text-gray-300 block md:inline"
           >
             Exhibitions
-          </Link>
+          </Link> */}
           <Link href="/events" className="hover:text-gray-300 block md:inline">
-            Events
+            Events & Exhibitions
           </Link>
           <Link href="/pricing" className="hover:text-gray-300 block md:inline">
             Pricing
@@ -76,12 +76,12 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-4">
           {isAuthenticated ? (
             <>
-              <Link
+              {/* <Link
                 href="/membership"
                 className="bg-white hover:bg-gray-600 text-purple-900 font-bold py-2 px-4 rounded"
               >
                 Become a Member
-              </Link>
+              </Link> */}
               <div
                 onClick={handleLogout}
                 className="bg-white text-purple-900 font-bold py-2 px-4 rounded hover:bg-gray-200"

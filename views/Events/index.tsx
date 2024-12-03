@@ -55,7 +55,9 @@ const EventsPageView: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-center mb-8">Events</h1>
+      <h1 className="text-4xl font-bold text-center mb-8 text-purple-900">
+        Events
+      </h1>
 
       {/* Tabs for Past, Current, Future */}
       <div className="flex justify-center mb-6">

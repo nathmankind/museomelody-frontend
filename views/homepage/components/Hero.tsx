@@ -16,10 +16,10 @@ export const HeroSection = () => {
           spirit of creativity.
         </p>
         <Link
-          href="/exhibitions"
+          href="/events"
           className="mt-8 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 md:py-3 md:px-6 rounded-lg text-sm md:text-base"
         >
-          Check Exhibitions
+          Check Events
         </Link>
       </div>
     </section>

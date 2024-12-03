@@ -11,6 +11,7 @@ const config: Config = {
     // "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     // "./src/**/*.{js,ts,jsx,tsx}",
     "./views/**/*.{js,ts,jsx,tsx}",
+    "./layout/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
