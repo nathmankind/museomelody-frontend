@@ -10,7 +10,6 @@ const MembershipFormView = () => {
   const router = useRouter();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
 
   const form = useFormik({
     initialValues: {
@@ -19,8 +18,9 @@ const MembershipFormView = () => {
       email: "",
       subscriptionType: "",
     },
-    onSubmit: (values) => {
+    onSubmit: () => {
       // Do something
+      setIsSubmitting(true);
     },
   });
 
@@ -76,7 +76,6 @@ const MembershipFormView = () => {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Join Now"}
         </button>
-        {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
     </FormikProvider>
   );

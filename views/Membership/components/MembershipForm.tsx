@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useRouter } from "next/navigation";
 
 interface FormData {
   name: string;
@@ -13,12 +12,7 @@ interface FormData {
 
 const MembershipFormView: React.FC = () => {
   const router = useRouter();
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/login');
-    },
-  });
+
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -43,15 +37,10 @@ const MembershipFormView: React.FC = () => {
     setLoading(true);
 
     try {
-      if (!session) {
-        router.push('/login');
-        return;
-      }
-
-      const response = await fetch('/api/membership', {
-        method: 'POST',
+      const response = await fetch("/api/membership", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           membershipType: formData.membershipType,
@@ -62,13 +51,13 @@ const MembershipFormView: React.FC = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Failed to submit membership');
+        throw new Error(data.error || "Failed to submit membership");
       }
 
       // Redirect to success page
-      router.push('/membership-success');
+      router.push("/membership-success");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -84,9 +73,7 @@ const MembershipFormView: React.FC = () => {
       </h2>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-          {error}
-        </div>
+        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
       )}
 
       {/* ... your existing form fields ... */}
@@ -96,9 +83,9 @@ const MembershipFormView: React.FC = () => {
         disabled={loading}
         className={`w-full py-3 bg-purple-600 text-white font-semibold rounded-md 
           hover:bg-purple-700 transition duration-200 ease-in-out
-          ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
       >
-        {loading ? 'Submitting...' : 'Submit'}
+        {loading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );

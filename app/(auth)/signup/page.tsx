@@ -1,18 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FormikProvider, useFormik } from "formik";
 import { usePostData } from "@/utils/hooks/useMutation";
-import { registerUser } from "@/utils/services/api.services";
-import { useMutation } from "@tanstack/react-query";
 
 export default function SignUp() {
   const [errMessage, setErrMessage] = useState("");
   const router = useRouter();
 
-  const { mutateAsync, isError, isPending, error } = usePostData();
+  const { mutateAsync, isPending, error } = usePostData();
 
   const form = useFormik({
     initialValues: {
@@ -23,14 +21,14 @@ export default function SignUp() {
     },
 
     onSubmit: (values) => {
-      let payload = {
+      const payload = {
         username: values.username,
         email: values.email,
         password: values.password,
         role: "user",
       };
       mutateAsync({ endpoint: "/auth/register", payload })
-        .then((res) => {
+        .then(() => {
           router.push("/verify-email");
         })
         .catch((err) => {
@@ -48,7 +46,7 @@ export default function SignUp() {
 
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {error.message}
+            {errMessage}
           </div>
         )}
         <FormikProvider value={form}>

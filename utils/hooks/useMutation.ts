@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 
 import { createApiClient } from "../Provider/api";
+import { AxiosResponse } from "axios";
 
 interface PostDataProps<T> {
   endpoint: string;
@@ -31,7 +32,7 @@ interface PostDataProps<T> {
 // };
 
 export const usePostData = <T, R>(): UseMutationResult<
-  R,
+  AxiosResponse,
   Error,
   PostDataProps<T>
 > => {
@@ -39,8 +40,8 @@ export const usePostData = <T, R>(): UseMutationResult<
   const mutationFn = async ({
     endpoint,
     payload,
-  }: PostDataProps<T>): Promise<R> => {
-    const { data } = await $http.post<R>(endpoint, payload);
+  }: PostDataProps<T>): Promise<AxiosResponse> => {
+    const { data } = await $http.post<AxiosResponse>(endpoint, payload);
     return data;
   };
 

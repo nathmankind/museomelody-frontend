@@ -12,7 +12,7 @@ export default function Verify() {
   const router = useRouter();
   const [errMessage, setErrMessage] = useState("");
 
-  const { mutateAsync, isError, isPending, error } = usePostData();
+  const { mutateAsync, isPending, error } = usePostData();
 
   const form = useFormik({
     initialValues: {
@@ -23,9 +23,9 @@ export default function Verify() {
       // do something
 
       mutateAsync({ endpoint: "/auth/verify-email", payload: values })
-        .then((res: any) => {
+        .then((res) => {
           // Do something
-          Cookies.set(token_name, res.data.accessToken);
+          Cookies.set(token_name, res?.data?.accessToken ?? "");
           router.push("/");
         })
         .catch((err) => {

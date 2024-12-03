@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FormikProvider, useFormik } from "formik";
 import { usePostData } from "@/utils/hooks/useMutation";
@@ -12,22 +12,19 @@ export default function SignIn() {
   const router = useRouter();
   const [errMessage, setErrMessage] = useState("");
 
-  const { mutate, mutateAsync, isError, isPending, error } = usePostData();
+  const { mutateAsync, isPending, error } = usePostData();
 
   const form = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       // do something
-
       mutateAsync({ endpoint: "/auth/login", payload: values })
-        .then((res: any) => {
-          // Do something
+        .then((res) => {
           Cookies.set(token_name, res.data.accessToken);
           router.push("/");
-          // redirect("/");
         })
         .catch((err) => {
           setErrMessage(err.response.data.details.message as string);

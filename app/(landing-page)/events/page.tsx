@@ -1,7 +1,6 @@
 "use client";
 import { IEvent } from "@/interface/event.interface";
 import { useFetchData } from "@/utils/hooks/useFetchData";
-import EventsPageView from "@/views/Events";
 import EventsListPage from "@/views/Events/EventListing";
 
 interface IEventResponse {
@@ -11,5 +10,5 @@ export default function EventsPage() {
   const getAllEvents = useFetchData<IEventResponse>("/events");
 
   console.log("IEventResponse", getAllEvents);
-  return <EventsListPage events={getAllEvents.data?.data!} />;
+  return <EventsListPage events={getAllEvents.data?.data || []} />;
 }
