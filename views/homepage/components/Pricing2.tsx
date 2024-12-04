@@ -1,5 +1,5 @@
 // components/MembershipPlans.tsx
-import React from 'react';
+import React from "react";
 
 const MembershipPlans: React.FC = () => {
   const plans = [
@@ -15,7 +15,11 @@ const MembershipPlans: React.FC = () => {
       name: "Standard",
       price: "$25",
       duration: "per month",
-      features: ["All Basic features", "Member-only events", "Gift shop discounts"],
+      features: [
+        "All Basic features",
+        "Member-only events",
+        "Gift shop discounts",
+      ],
       bgColor: "bg-purple-700",
       textColor: "text-white",
       recommended: true,
@@ -24,17 +28,28 @@ const MembershipPlans: React.FC = () => {
       name: "Premium",
       price: "$50",
       duration: "per month",
-      features: ["All Standard features", "Exclusive previews", "Free guest passes"],
+      features: [
+        "All Standard features",
+        "Exclusive previews",
+        "Free guest passes",
+      ],
       bgColor: "bg-white",
       textColor: "text-gray-700",
     },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-purple-100 to-purple-200">
+    <section
+      className="py-20 bg-gradient-to-b from-purple-100 to-purple-200"
+      id="pricing"
+    >
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-5xl font-bold text-purple-900 mb-6">Choose Your Membership Plan</h2>
-        <p className="text-lg text-gray-600 mb-12">Access exclusive benefits and become part of our community!</p>
+        <h2 className="text-5xl font-bold text-purple-900 mb-6">
+          Choose Your Membership Plan
+        </h2>
+        <p className="text-lg text-gray-600 mb-12">
+          Access exclusive benefits and become part of our community!
+        </p>
         <div className="grid gap-8 md:grid-cols-3">
           {plans.map((plan, index) => (
             <div
@@ -50,7 +65,8 @@ const MembershipPlans: React.FC = () => {
               )}
               <h3 className="text-3xl font-semibold mb-4">{plan.name}</h3>
               <p className="text-5xl font-extrabold mb-2">
-                {plan.price} <span className="text-lg font-normal">{plan.duration}</span>
+                {plan.price}{" "}
+                <span className="text-lg font-normal">{plan.duration}</span>
               </p>
               <ul className="space-y-3 mb-6 text-lg">
                 {plan.features.map((feature, idx) => (

@@ -67,7 +67,7 @@ const Navbar = () => {
           <Link href="/events" className="hover:text-gray-300 block md:inline">
             Events & Exhibitions
           </Link>
-          <Link href="/pricing" className="hover:text-gray-300 block md:inline">
+          <Link href="#pricing" className="hover:text-gray-300 block md:inline">
             Pricing
           </Link>
         </div>

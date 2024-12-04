@@ -1,5 +1,5 @@
 // components/MembershipPlans.tsx
-import React from 'react';
+import React from "react";
 
 const MembershipPlans: React.FC = () => {
   const plans = [
@@ -12,28 +12,40 @@ const MembershipPlans: React.FC = () => {
     {
       name: "Standard",
       price: "$25/month",
-      features: ["All Basic features", "Member-only events", "Gift shop discounts"],
+      features: [
+        "All Basic features",
+        "Member-only events",
+        "Gift shop discounts",
+      ],
       bgColor: "bg-purple-100",
     },
     {
       name: "Premium",
       price: "$50/month",
-      features: ["All Standard features", "Exclusive previews", "Free guest passes"],
+      features: [
+        "All Standard features",
+        "Exclusive previews",
+        "Free guest passes",
+      ],
       bgColor: "bg-purple-300",
     },
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50" id="pricing">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-purple-900 mb-10">Membership Plans</h2>
+        <h2 className="text-4xl font-bold text-center text-purple-900 mb-10">
+          Membership Plans
+        </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan, index) => (
             <div
               key={index}
               className={`p-6 rounded-lg shadow-lg ${plan.bgColor} flex flex-col items-center`}
             >
-              <h3 className="text-2xl font-semibold text-gray-800">{plan.name}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800">
+                {plan.name}
+              </h3>
               <p className="text-xl text-purple-900 my-4">{plan.price}</p>
               <ul className="space-y-3 mb-6 text-gray-700">
                 {plan.features.map((feature, idx) => (
